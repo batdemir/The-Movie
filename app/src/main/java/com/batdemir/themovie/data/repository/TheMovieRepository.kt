@@ -35,6 +35,6 @@ class TheMovieRepository @Inject constructor(
         }
     ).flow
 
-    fun getMovie(movieId: Int) =
+    fun getMovie(movieId: Long) =
         performGetOperation(networkCall = { remoteDataSource.getMovie(movieId) })
 }

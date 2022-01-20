@@ -21,7 +21,7 @@ data class Movie(
     val overview: String? = null,
     val popularity: Double? = null,
     @SerializedName("poster_path")
-    val posterPath: Any? = null,
+    val posterPath: String? = null,
     @SerializedName("production_companies")
     val productionCompanies: List<ProductionCompany>? = null,
     @SerializedName("production_countries")

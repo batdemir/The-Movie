@@ -22,6 +22,7 @@ plugins {
 
 val buildType: BuildType = BuildType.DEBUG
 val apiTypeName: String = "String"
+val cdnApi: String = "CDN_API"
 val api: String = "API"
 val apiKey: String = "API_KEY"
 
@@ -43,6 +44,11 @@ android {
             BuildType.DEBUG -> {
                 this.buildConfigField(
                     apiTypeName,
+                    cdnApi,
+                    properties["CDN_API"].toString()
+                )
+                this.buildConfigField(
+                    apiTypeName,
                     api,
                     properties["TEST_API"].toString()
                 )
@@ -58,6 +64,11 @@ android {
                 )
             }
             BuildType.RELEASE -> {
+                this.buildConfigField(
+                    apiTypeName,
+                    cdnApi,
+                    properties["CDN_API"].toString()
+                )
                 this.buildConfigField(
                     apiTypeName,
                     api,

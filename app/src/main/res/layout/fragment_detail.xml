@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.batdemir.themovie.data.entities.db.Movie" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/root_fragment_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".ui.detail.DetailFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_view"
+                setImage="@{model.posterPath}"
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@id/image_view_imdb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@mipmap/ic_launcher" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_view_imdb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_custom_imdb"
+                app:layout_constraintBottom_toTopOf="@id/text_view_title"
+                app:layout_constraintEnd_toStartOf="@id/image_view_rate"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_view" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_view_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_custom_rate"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_imdb"
+                app:layout_constraintEnd_toStartOf="@id/text_view_rate"
+                app:layout_constraintStart_toEndOf="@id/image_view_imdb"
+                app:layout_constraintTop_toTopOf="@id/image_view_imdb" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@{model.voteAverage.toString()}"
+                android:textColor="#2B2D42"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_imdb"
+                app:layout_constraintEnd_toStartOf="@id/view_pointer"
+                app:layout_constraintStart_toEndOf="@id/image_view_rate"
+                app:layout_constraintTop_toTopOf="@id/image_view_imdb"
+                tools:text="7.8" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_rate_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="#ADB5BD"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_imdb"
+                app:layout_constraintEnd_toStartOf="@id/view_pointer"
+                app:layout_constraintStart_toEndOf="@id/text_view_rate"
+                app:layout_constraintTop_toTopOf="@id/image_view_imdb"
+                tools:text="/10" />
+
+            <View
+                android:id="@+id/view_pointer"
+                android:layout_width="4dp"
+                android:layout_height="4dp"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/holo_orange_dark"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_imdb"
+                app:layout_constraintEnd_toStartOf="@id/text_view_date"
+                app:layout_constraintStart_toEndOf="@id/text_view_rate_default"
+                app:layout_constraintTop_toTopOf="@id/image_view_imdb" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{model.releaseDate}"
+                android:textColor="#2B2D42"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_imdb"
+                app:layout_constraintStart_toEndOf="@id/view_pointer"
+                app:layout_constraintTop_toTopOf="@id/image_view_imdb"
+                tools:text="15.06.2021" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{model.title}"
+                android:textColor="#2B2D42"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/text_view_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image_view_imdb"
+                tools:text="Moonrise Kingdom (2012)" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text_view_description"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@{model.overview}"
+                android:textColor="#2B2D42"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_title"
+                tools:text="Moonrise Kingdom is a 2012 American coming-of-age comedy-drama film directed by Wes Anderson, written by Anderson and Roman Coppola. It features an ensemble cast including Bruce Willis, Edward Norton, Bill Murray, Frances McDormand, Tilda Swinton, Jason Schwartzman, Bob Balaban, Harvey Keitel, and newcomers Jared Gilman and Kara Hayward. Largely set on the fictional New England island of New Penzance, it tells the story of an orphan boy (Gilman) who escapes from a scouting camp to unite with his pen pal and love interest, a girl with aggressive tendencies (Hayward). Feeling alienated from their guardians and shunned by their peers, the lovers abscond to an isolated beach. Meanwhile, the island's police captain (Willis) organizes a search party of scouts and family members to locate the runaways. In crafting their screenplay, Anderson and Coppola drew from personal experiences and memories of" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

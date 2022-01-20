@@ -1,5 +1,6 @@
 package com.batdemir.themovie.data.entities.db
 
+import com.batdemir.themovie.other.RecyclerItem
 import com.google.gson.annotations.SerializedName
 
 data class MovieResult(
@@ -8,7 +9,7 @@ data class MovieResult(
     val backdropPath: String? = null,
     @SerializedName("genre_ids")
     val genreIds: List<Int>? = null,
-    val id: Int? = null,
+    override val id: Long = 0,
     @SerializedName("original_language")
     val originalLanguage: String? = null,
     @SerializedName("original_title")
@@ -23,5 +24,6 @@ data class MovieResult(
     val video: Boolean? = null,
     @SerializedName("vote_average")
     val voteAverage: Double? = null,
-    val voteCount: Int? = null
-)
+    val voteCount: Int? = null,
+    override var isSelected: Boolean = false
+) : RecyclerItem

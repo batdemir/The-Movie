@@ -1,6 +1,7 @@
 <resources>
     <string name="title_home">Home</string>
     <string name="title_settings">Settings</string>
+    <string name="title_detail">Detail</string>
 
     <!-- KEYS -->
     <string name="KEY_LANGUAGE" translatable="false">language</string>

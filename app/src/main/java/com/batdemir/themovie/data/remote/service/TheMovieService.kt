@@ -24,9 +24,9 @@ interface TheMovieService {
         @Query("region") region: String? = null,
     ): Response<Movies>
 
-    @GET("/3/movie/upcoming/{movie_id}")
+    @GET("/3/movie/{movie_id}")
     suspend fun getMovie(
-        @Path("movie_id") movieId: Int,
+        @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String,
         @Query("language") language: String? = null,
         @Query("append_to_response") appendToResponse: String? = null,

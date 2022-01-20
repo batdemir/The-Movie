@@ -21,7 +21,7 @@ class TheMovieRemoteDataSource @Inject constructor(
     ) = getResult { service.getMovieUpComings(BuildConfig.API_KEY, language, page, region) }
 
     suspend fun getMovie(
-        movieId: Int,
+        movieId: Long,
         language: String? = null,
         appendToResponse: String? = null,
     ) = getResult { service.getMovie(movieId, BuildConfig.API_KEY, language, appendToResponse) }

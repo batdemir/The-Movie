@@ -2,6 +2,7 @@
 <resources>
     <string name="title_home">Ev</string>
     <string name="title_settings">Ayarlar</string>
+    <string name="title_detail">Detay</string>
 
     <!-- SETTINGS -->
     <string name="application_settings">Uygulama Ayarları</string>
