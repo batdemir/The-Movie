@@ -20,10 +20,10 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
 }
 
-val buildType: BuildType = BuildType.RELEASE
+val buildType: BuildType = BuildType.DEBUG
 val apiTypeName: String = "String"
-val githubApi: String = "GITHUB_API"
-val stackOverFlowApi: String = "STACK_OVER_FLOW_API"
+val api: String = "API"
+val apiKey: String = "API_KEY"
 
 android {
     compileSdk = AppConfig.compileSdk
@@ -43,13 +43,13 @@ android {
             BuildType.DEBUG -> {
                 this.buildConfigField(
                     apiTypeName,
-                    githubApi,
-                    properties["TEST_GITHUB_API"].toString()
+                    api,
+                    properties["TEST_API"].toString()
                 )
                 this.buildConfigField(
                     apiTypeName,
-                    stackOverFlowApi,
-                    properties["TEST_STACK_OVER_FLOW_API"].toString()
+                    apiKey,
+                    properties["TEST_API_KEY"].toString()
                 )
                 this.resValue(
                     "string",
@@ -60,13 +60,13 @@ android {
             BuildType.RELEASE -> {
                 this.buildConfigField(
                     apiTypeName,
-                    githubApi,
-                    properties["PROD_GITHUB_API"].toString()
+                    api,
+                    properties["PROD_API"].toString()
                 )
                 this.buildConfigField(
                     apiTypeName,
-                    stackOverFlowApi,
-                    properties["PROD_STACK_OVER_FLOW_API"].toString()
+                    apiKey,
+                    properties["PROD_API_KEY"].toString()
                 )
                 this.resValue(
                     "string",
@@ -74,6 +74,7 @@ android {
                     getAppName(buildType)
                 )
                 isMinifyEnabled = false
+                isShrinkResources = false
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
@@ -113,7 +114,7 @@ enum class BuildType(val value: String) {
 }
 
 fun getAppName(buildType: BuildType): String {
-    val appName = "batdemir"
+    val appName = "The Movie"
     return when (buildType) {
         BuildType.DEBUG -> "$appName - Debug"
         BuildType.RELEASE -> appName
