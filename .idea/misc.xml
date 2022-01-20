@@ -3,6 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/drawable/ic_black_about.xml" value="0.2046875" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/drawable/ic_black_github.xml" value="0.2046875" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/drawable/ic_black_padlock.xml" value="0.2046875" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/drawable/ic_black_settings.xml" value="0.2046875" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/drawable/ic_black_shuffle.xml" value="0.2046875" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/drawable/ic_black_sync.xml" value="0.2046875" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/drawable/ic_black_translating.xml" value="0.2046875" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/layout/activity_main.xml" value="0.29257246376811596" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/layout/fragment_home.xml" value="0.16767983789260385" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/layout/view_empty.xml" value="0.18854166666666666" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/layout/view_progress.xml" value="0.29483695652173914" />
+        <entry key="..\:/Projects/The-Movie/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.18854166666666666" />
         <entry key="..\:/Projects/kotlin.template.project/app/src/main/res/drawable/ic_black_about.xml" value="0.2814814814814815" />
         <entry key="..\:/Projects/kotlin.template.project/app/src/main/res/drawable/ic_black_empty.xml" value="0.2814814814814815" />
         <entry key="..\:/Projects/kotlin.template.project/app/src/main/res/layout/activity_main.xml" value="0.1956521739130435" />
