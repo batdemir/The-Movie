@@ -1,6 +1,7 @@
 <resources>
     <string name="title_home">Home</string>
     <string name="title_settings">Settings</string>
+    <string name="title_detail">Detail</string>
 
     <!-- KEYS -->
     <string name="KEY_LANGUAGE" translatable="false">language</string>
@@ -35,4 +36,7 @@
 
     <!-- EMPTY -->
     <string name="not_found">Not Found</string>
+
+    <!-- DETAIL -->
+    <string name="rate_default" translatable="false">/10</string>
 </resources>

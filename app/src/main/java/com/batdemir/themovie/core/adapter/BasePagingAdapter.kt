@@ -14,7 +14,7 @@ class BasePagingAdapter<T : RecyclerItem, V : ViewDataBinding>(
     private val layoutId: Int,
     private var bindListener: BindListener<T, V>? = null,
     private var itemListener: ItemListener<T>? = null,
-    private val enableSingleSelectionEvent: Boolean = true,
+    private val enableSingleSelectionEvent: Boolean = false,
     private val singleSelectionEvent: () -> Unit = {},
 ) : PagingDataAdapter<RecyclerItem, BaseViewHolder<V>>(BASE_DIFF_UTIL) {
     private var lastSelectedPosition = -1

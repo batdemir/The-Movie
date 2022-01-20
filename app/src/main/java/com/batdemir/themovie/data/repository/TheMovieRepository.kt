@@ -3,7 +3,7 @@ package com.batdemir.themovie.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.batdemir.themovie.data.entities.db.MovieResult
+import com.batdemir.themovie.data.entities.dto.MovieResultDto
 import com.batdemir.themovie.data.paging.MovieType
 import com.batdemir.themovie.data.paging.TheMoviePagingRemoteDatasource
 import com.batdemir.themovie.data.remote.datasource.TheMovieRemoteDataSource
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class TheMovieRepository @Inject constructor(
     private val remoteDataSource: TheMovieRemoteDataSource
 ) {
-    fun getMovieNowPlayings(): Flow<PagingData<MovieResult>> = Pager(
+    fun getMovieNowPlayings(): Flow<PagingData<MovieResultDto>> = Pager(
         config = PagingConfig(pageSize = Constant.NETWORK_PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             TheMoviePagingRemoteDatasource(
@@ -25,7 +25,7 @@ class TheMovieRepository @Inject constructor(
         }
     ).flow
 
-    fun getMovieUpComings(): Flow<PagingData<MovieResult>> = Pager(
+    fun getMovieUpComings(): Flow<PagingData<MovieResultDto>> = Pager(
         config = PagingConfig(pageSize = Constant.NETWORK_PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             TheMoviePagingRemoteDatasource(
@@ -35,6 +35,6 @@ class TheMovieRepository @Inject constructor(
         }
     ).flow
 
-    fun getMovie(movieId: Int) =
+    fun getMovie(movieId: Long) =
         performGetOperation(networkCall = { remoteDataSource.getMovie(movieId) })
 }
