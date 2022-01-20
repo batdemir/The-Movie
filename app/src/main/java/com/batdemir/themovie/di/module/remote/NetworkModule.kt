@@ -2,7 +2,7 @@ package com.batdemir.themovie.di.module.remote
 
 import android.content.Context
 import com.batdemir.themovie.BuildConfig
-import com.batdemir.themovie.di.module.remote.interceptor.*
+import com.batdemir.themovie.di.module.remote.interceptor.HostSelectionInterceptor
 import com.batdemir.themovie.other.Constant
 import com.batdemir.themovie.utils.DateFormat
 import com.google.gson.GsonBuilder
@@ -57,10 +57,6 @@ object NetworkModule {
         @ApplicationContext context: Context,
         builder: OkHttpClient.Builder,
         interceptor: HttpLoggingInterceptor,
-        acceptLanguageInterceptor: AcceptLanguageInterceptor,
-        authInterceptor: AuthInterceptor,
-        encodingInterceptor: EncodingInterceptor,
-        userAgentInterceptor: UserAgentInterceptor
     ): OkHttpClient {
         if (BuildConfig.DEBUG) {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
