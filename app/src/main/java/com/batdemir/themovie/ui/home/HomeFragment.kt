@@ -33,10 +33,6 @@ class HomeFragment :
         getBinding().viewModel = viewModel
     }
 
-    override fun setupData() {
-        super.setupData()
-    }
-
     override fun setupListener() {
         //("Not yet implemented")
     }
