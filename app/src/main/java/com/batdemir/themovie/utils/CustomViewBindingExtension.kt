@@ -4,7 +4,6 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.batdemir.themovie.BuildConfig
 import com.batdemir.themovie.app.GlideApp
 import com.google.android.material.imageview.ShapeableImageView
 
@@ -15,10 +14,9 @@ class CustomViewBindingExtension {
         fun ShapeableImageView.bindImage(res: String?) {
             if (res.isNullOrEmpty())
                 return
-            val url = BuildConfig.CDN_API + res
             GlideApp
                 .with(this.context)
-                .load(url)
+                .load(res)
                 .into(this)
         }
 

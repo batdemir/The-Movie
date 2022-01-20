@@ -14,7 +14,7 @@ import com.batdemir.themovie.core.adapter.BindListener
 import com.batdemir.themovie.core.adapter.ItemListener
 import com.batdemir.themovie.core.view.BaseActionLoadState
 import com.batdemir.themovie.core.view.BaseFragment
-import com.batdemir.themovie.data.entities.db.MovieResult
+import com.batdemir.themovie.data.entities.dto.MovieResultDto
 import com.batdemir.themovie.databinding.FragmentHomeBinding
 import com.batdemir.themovie.databinding.ItemMovieBinding
 import com.batdemir.themovie.databinding.ItemMovieSliderBinding
@@ -32,18 +32,18 @@ class HomeFragment :
     private val sliderAdapter by lazy {
         BasePagingAdapter(
             layoutId = R.layout.item_movie_slider,
-            bindListener = object : BindListener<MovieResult, ItemMovieSliderBinding> {
+            bindListener = object : BindListener<MovieResultDto, ItemMovieSliderBinding> {
                 override fun onBind(
                     holderBase: BaseViewHolder<ItemMovieSliderBinding>,
-                    model: MovieResult,
+                    model: MovieResultDto,
                     position: Int
                 ) {
                     holderBase.binding.model = model
                     holderBase.binding.executePendingBindings()
                 }
             },
-            itemListener = object : ItemListener<MovieResult> {
-                override fun onClick(value: MovieResult) {
+            itemListener = object : ItemListener<MovieResultDto> {
+                override fun onClick(value: MovieResultDto) {
                     findNavController().navigate(
                         HomeFragmentDirections.actionHomeFragmentToDetailFragment(
                             value.id
@@ -51,7 +51,7 @@ class HomeFragment :
                     )
                 }
 
-                override fun onLongClick(value: MovieResult) {
+                override fun onLongClick(value: MovieResultDto) {
                     //("Not yet implemented")
                 }
             }
@@ -60,18 +60,18 @@ class HomeFragment :
     private val adapter by lazy {
         BasePagingAdapter(
             layoutId = R.layout.item_movie,
-            bindListener = object : BindListener<MovieResult, ItemMovieBinding> {
+            bindListener = object : BindListener<MovieResultDto, ItemMovieBinding> {
                 override fun onBind(
                     holderBase: BaseViewHolder<ItemMovieBinding>,
-                    model: MovieResult,
+                    model: MovieResultDto,
                     position: Int
                 ) {
                     holderBase.binding.model = model
                     holderBase.binding.executePendingBindings()
                 }
             },
-            itemListener = object : ItemListener<MovieResult> {
-                override fun onClick(value: MovieResult) {
+            itemListener = object : ItemListener<MovieResultDto> {
+                override fun onClick(value: MovieResultDto) {
                     findNavController().navigate(
                         HomeFragmentDirections.actionHomeFragmentToDetailFragment(
                             value.id
@@ -79,7 +79,7 @@ class HomeFragment :
                     )
                 }
 
-                override fun onLongClick(value: MovieResult) {
+                override fun onLongClick(value: MovieResultDto) {
                     //("Not yet implemented")
                 }
             }
@@ -105,16 +105,27 @@ class HomeFragment :
     }
 
     override fun setupListener() {
-//        getBinding().swipeRefreshLayout.setOnRefreshListener {
-//            getBinding().swipeRefreshLayout.isRefreshing = false
-//        }
-        setPagingAdapterLoadStateListener(viewModel, adapter)
         TabLayoutMediator(getBinding().tabLayout, getBinding().viewPager) { _, _ ->
         }.attach()
+        getBinding().swipeRefreshLayout.setOnRefreshListener {
+            getBinding().swipeRefreshLayout.isRefreshing = false
+            setupData()
+        }
+        setPagingAdapterLoadStateListener(viewModel, adapter)
     }
 
     override fun setupData() {
         super.setupData()
+        observeSlider()
+        observeList()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        removePagingAdapterLoadStateListener(viewModel, adapter)
+    }
+
+    private fun observeSlider() {
         viewLifecycleOwner
             .lifecycleScope
             .launch {
@@ -125,6 +136,9 @@ class HomeFragment :
                         sliderAdapter.mySummitData(it)
                     }
             }
+    }
+
+    private fun observeList() {
         viewLifecycleOwner
             .lifecycleScope
             .launch {
@@ -135,11 +149,6 @@ class HomeFragment :
                         adapter.mySummitData(it)
                     }
             }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        removePagingAdapterLoadStateListener(viewModel, adapter)
     }
 
     companion object {

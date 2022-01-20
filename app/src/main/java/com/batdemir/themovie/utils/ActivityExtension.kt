@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.batdemir.themovie.R
-import com.batdemir.themovie.ui.SplashActivity
+import com.batdemir.themovie.ui.MainActivity
 
 fun Activity.move(
     to: Class<*>,
@@ -19,7 +19,7 @@ fun Activity.move(
 }
 
 fun Activity.reset() {
-    val intent = Intent(this, SplashActivity::class.java)
+    val intent = Intent(this, MainActivity::class.java)
     this.startActivity(intent)
     this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     this.finishAffinity()

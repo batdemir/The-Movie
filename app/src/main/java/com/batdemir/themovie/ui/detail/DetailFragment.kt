@@ -1,5 +1,6 @@
 package com.batdemir.themovie.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -26,7 +27,9 @@ class DetailFragment :
     }
 
     override fun setupListener() {
-        //("Not yet implemented")
+        getBinding().imageViewImdb.setOnClickListener {
+            viewModel.clickIMDB(getBinding().model?.imdbId)
+        }
     }
 
     private fun onStateChanged(state: DetailViewModel.State) {
@@ -34,6 +37,9 @@ class DetailFragment :
             is DetailViewModel.State.Init -> {
                 getBinding().model = state.value
                 getBinding().executePendingBindings()
+            }
+            is DetailViewModel.State.ClickedIMDB -> {
+                startActivity(Intent(Intent.ACTION_VIEW, state.uri))
             }
         }
     }

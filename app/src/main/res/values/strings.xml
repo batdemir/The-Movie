@@ -36,4 +36,7 @@
 
     <!-- EMPTY -->
     <string name="not_found">Not Found</string>
+
+    <!-- DETAIL -->
+    <string name="rate_default" translatable="false">/10</string>
 </resources>

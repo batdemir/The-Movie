@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <ListPreference />
+
     <PreferenceCategory
         android:icon="@drawable/ic_black_sync"
         app:key="@string/KEY_APPLICATION_CATEGORY"

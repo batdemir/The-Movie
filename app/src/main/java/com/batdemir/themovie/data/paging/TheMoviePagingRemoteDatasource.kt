@@ -2,7 +2,8 @@ package com.batdemir.themovie.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.batdemir.themovie.data.entities.db.MovieResult
+import com.batdemir.themovie.data.entities.db.toDto
+import com.batdemir.themovie.data.entities.dto.MovieResultDto
 import com.batdemir.themovie.data.remote.datasource.TheMovieRemoteDataSource
 import com.batdemir.themovie.other.Constant
 import com.batdemir.themovie.other.Resource
@@ -12,8 +13,8 @@ import retrofit2.HttpException
 class TheMoviePagingRemoteDatasource(
     private val remoteDataSource: TheMovieRemoteDataSource,
     private val movieType: MovieType
-) : PagingSource<Long, MovieResult>() {
-    override suspend fun load(params: LoadParams<Long>): LoadResult<Long, MovieResult> {
+) : PagingSource<Long, MovieResultDto>() {
+    override suspend fun load(params: LoadParams<Long>): LoadResult<Long, MovieResultDto> {
         return try {
             val key = params.key ?: Constant.START_PAGE_INDEX
             val response = when (movieType) {
@@ -38,7 +39,7 @@ class TheMoviePagingRemoteDatasource(
                 else -> key.plus(1)
             }
             LoadResult.Page(
-                data = response.data?.results ?: listOf(),
+                data = response.data?.results?.map { x -> x.toDto() } ?: listOf(),
                 prevKey = prevKey,
                 nextKey = nextKey
             )
@@ -56,7 +57,7 @@ class TheMoviePagingRemoteDatasource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Long, MovieResult>): Long? {
+    override fun getRefreshKey(state: PagingState<Long, MovieResultDto>): Long? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)

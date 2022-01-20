@@ -7,16 +7,16 @@
 
         <variable
             name="model"
-            type="com.batdemir.themovie.data.entities.db.MovieResult" />
+            type="com.batdemir.themovie.data.entities.dto.MovieResultDto" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/root_item_movie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="@dimen/card_margin_bottom"
         app:cardCornerRadius="0dp"
-        app:contentPadding="16dp">
+        app:contentPadding="@dimen/content_padding">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout"
@@ -26,9 +26,9 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_view"
                 setImage="@{model.posterPath}"
-                android:layout_width="104dp"
-                android:layout_height="104dp"
-                android:scaleType="centerCrop"
+                android:layout_width="@dimen/card_image_size"
+                android:layout_height="@dimen/card_image_size"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/text_view_title"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +39,12 @@
                 android:id="@+id/text_view_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin_large"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="@{model.title}"
+                android:textColor="@color/text_color_primary"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/text_view_description"
@@ -57,7 +60,7 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@{model.overview}"
-                android:textColor="#8D99AE"
+                android:textColor="@color/text_color_primary_gray"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toTopOf="@id/text_view_date"
                 app:layout_constraintEnd_toEndOf="@id/text_view_title"
@@ -71,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{model.releaseDate}"
                 android:textAlignment="textEnd"
-                android:textColor="#8D99AE"
+                android:textColor="@color/text_color_primary_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/text_view_title"

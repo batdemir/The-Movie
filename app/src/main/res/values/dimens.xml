@@ -1,1 +1,12 @@
-<resources />
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin">8dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
+    <dimen name="content_padding">16dp</dimen>
+    <dimen name="card_margin_bottom">1dp</dimen>
+    <dimen name="pointer_size">4dp</dimen>
+    <dimen name="card_image_size">104dp</dimen>
+    <dimen name="tab_layout_height">40dp</dimen>
+    <dimen name="view_pager_height">256dp</dimen>
+</resources>

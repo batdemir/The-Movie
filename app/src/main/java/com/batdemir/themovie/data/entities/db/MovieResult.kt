@@ -1,6 +1,9 @@
 package com.batdemir.themovie.data.entities.db
 
-import com.batdemir.themovie.other.RecyclerItem
+import com.batdemir.themovie.BuildConfig
+import com.batdemir.themovie.data.entities.dto.MovieResultDto
+import com.batdemir.themovie.utils.DateFormat
+import com.batdemir.themovie.utils.toDateFormat
 import com.google.gson.annotations.SerializedName
 
 data class MovieResult(
@@ -9,7 +12,7 @@ data class MovieResult(
     val backdropPath: String? = null,
     @SerializedName("genre_ids")
     val genreIds: List<Int>? = null,
-    override val id: Long = 0,
+    val id: Long = 0,
     @SerializedName("original_language")
     val originalLanguage: String? = null,
     @SerializedName("original_title")
@@ -25,5 +28,18 @@ data class MovieResult(
     @SerializedName("vote_average")
     val voteAverage: Double? = null,
     val voteCount: Int? = null,
-    override var isSelected: Boolean = false
-) : RecyclerItem
+)
+
+fun MovieResult.toDto(): MovieResultDto {
+    return MovieResultDto(
+        id = this.id,
+        isSelected = false,
+        posterPath = BuildConfig.CDN_API + this.posterPath,
+        title = this.title,
+        overview = this.overview,
+        releaseDate = this.releaseDate?.toDateFormat(
+            DateFormat.SMALL_DATE_FORMAT,
+            DateFormat.SHOW_DATE_FORMAT
+        ),
+    )
+}

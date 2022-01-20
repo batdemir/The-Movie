@@ -22,22 +22,15 @@ abstract class BaseFragment<B : ViewDataBinding, V : BaseViewModel> constructor(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate<B>(layoutInflater, layoutId, container, false).apply {
-            this.lifecycleOwner = viewLifecycleOwner
+        if (binding == null) {
+            binding = DataBindingUtil.inflate<B>(layoutInflater, layoutId, container, false).apply {
+                this.lifecycleOwner = viewLifecycleOwner
+            }
+            setupDefinition(savedInstanceState)
+            setupData()
+            setupListener()
         }
-        setupDefinition(savedInstanceState)
         return binding!!.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupData()
-        setupListener()
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
     }
 
     override fun setupData() {

@@ -1,5 +1,9 @@
 package com.batdemir.themovie.data.entities.db
 
+import com.batdemir.themovie.BuildConfig
+import com.batdemir.themovie.data.entities.dto.MovieDto
+import com.batdemir.themovie.utils.DateFormat
+import com.batdemir.themovie.utils.toDateFormat
 import com.google.gson.annotations.SerializedName
 
 data class Movie(
@@ -11,7 +15,7 @@ data class Movie(
     val budget: Int? = null,
     val genres: List<Genre>? = null,
     val homepage: String? = null,
-    val id: Int? = null,
+    val id: Long = 0,
     @SerializedName("imdb_id")
     val imdbId: String? = null,
     @SerializedName("original_language")
@@ -41,3 +45,19 @@ data class Movie(
     @SerializedName("vote_count")
     val voteCount: Int? = null
 )
+
+fun Movie.toDto(): MovieDto {
+    return MovieDto(
+        id = this.id,
+        isSelected = false,
+        posterPath = BuildConfig.CDN_API + this.posterPath,
+        voteAverage = String.format("%.1f", this.voteAverage ?: 0f),
+        releaseDate = this.releaseDate?.toDateFormat(
+            DateFormat.SMALL_DATE_FORMAT,
+            DateFormat.SHOW_DATE_FORMAT
+        ),
+        title = this.title,
+        overview = this.overview,
+        imdbId = this.imdbId
+    )
+}
