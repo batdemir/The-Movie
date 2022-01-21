@@ -20,7 +20,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
 }
 
-val buildType: BuildType = BuildType.DEBUG
+val buildType: BuildType = BuildType.RELEASE
 val apiTypeName: String = "String"
 val cdnApi: String = "CDN_API"
 val api: String = "API"
@@ -35,6 +35,7 @@ android {
         versionCode = AppConfig.versionCode
         versionName = AppConfig.versionName
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        signingConfig = signingConfigs.getByName("debug")
     }
     buildFeatures {
         dataBinding = true
@@ -84,8 +85,8 @@ android {
                     "app_name",
                     getAppName(buildType)
                 )
-                isMinifyEnabled = false
-                isShrinkResources = false
+                isMinifyEnabled = true
+                isShrinkResources = true
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
@@ -111,12 +112,14 @@ dependencies {
             )
         )
     )
-    kapt(AppDependencies.compilerLibraries)
     implementation(AppDependencies.appLibraries)
-    debugImplementation(AppDependencies.debugLibraries)
-    releaseImplementation(AppDependencies.releaseLibraries)
     testImplementation(AppDependencies.testLibraries)
     androidTestImplementation(AppDependencies.androidTestLibraries)
+    kapt(AppDependencies.compilerLibraries)
+    kaptTest(AppDependencies.compilerTestLibraries)
+    kaptAndroidTet(AppDependencies.compilerAndroidTestLibraries)
+    debugImplementation(AppDependencies.debugLibraries)
+    releaseImplementation(AppDependencies.releaseLibraries)
 }
 
 enum class BuildType(val value: String) {
