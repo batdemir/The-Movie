@@ -1,6 +1,6 @@
 //app level config constants
 object AppConfig {
-    const val applicationId = "com.batdemir.template"
+    const val applicationId = "com.batdemir.themovie"
     const val compileSdk = 30
     const val minSdk = 26
     const val targetSdk = 30

@@ -6,9 +6,33 @@ fun DependencyHandler.kapt(list: List<String>) {
     }
 }
 
+fun DependencyHandler.kaptTest(list: List<String>) {
+    list.forEach { dependency ->
+        add("kaptTest", dependency)
+    }
+}
+
+fun DependencyHandler.kaptAndroidTet(list: List<String>) {
+    list.forEach { dependency ->
+        add("kaptAndroidTest", dependency)
+    }
+}
+
 fun DependencyHandler.implementation(list: List<String>) {
     list.forEach { dependency ->
         add("implementation", dependency)
+    }
+}
+
+fun DependencyHandler.testImplementation(list: List<String>) {
+    list.forEach { dependency ->
+        add("testImplementation", dependency)
+    }
+}
+
+fun DependencyHandler.androidTestImplementation(list: List<String>) {
+    list.forEach { dependency ->
+        add("androidTestImplementation", dependency)
     }
 }
 
@@ -21,17 +45,5 @@ fun DependencyHandler.debugImplementation(list: List<String>) {
 fun DependencyHandler.releaseImplementation(list: List<String>) {
     list.forEach { dependency ->
         add("releaseImplementation", dependency)
-    }
-}
-
-fun DependencyHandler.androidTestImplementation(list: List<String>) {
-    list.forEach { dependency ->
-        add("androidTestImplementation", dependency)
-    }
-}
-
-fun DependencyHandler.testImplementation(list: List<String>) {
-    list.forEach { dependency ->
-        add("testImplementation", dependency)
     }
 }

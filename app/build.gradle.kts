@@ -22,8 +22,9 @@ plugins {
 
 val buildType: BuildType = BuildType.RELEASE
 val apiTypeName: String = "String"
-val githubApi: String = "GITHUB_API"
-val stackOverFlowApi: String = "STACK_OVER_FLOW_API"
+val cdnApi: String = "CDN_API"
+val api: String = "API"
+val apiKey: String = "API_KEY"
 
 android {
     compileSdk = AppConfig.compileSdk
@@ -34,6 +35,7 @@ android {
         versionCode = AppConfig.versionCode
         versionName = AppConfig.versionName
         testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        signingConfig = signingConfigs.getByName("debug")
     }
     buildFeatures {
         dataBinding = true
@@ -43,13 +45,18 @@ android {
             BuildType.DEBUG -> {
                 this.buildConfigField(
                     apiTypeName,
-                    githubApi,
-                    properties["TEST_GITHUB_API"].toString()
+                    cdnApi,
+                    properties["CDN_API"].toString()
                 )
                 this.buildConfigField(
                     apiTypeName,
-                    stackOverFlowApi,
-                    properties["TEST_STACK_OVER_FLOW_API"].toString()
+                    api,
+                    properties["TEST_API"].toString()
+                )
+                this.buildConfigField(
+                    apiTypeName,
+                    apiKey,
+                    properties["TEST_API_KEY"].toString()
                 )
                 this.resValue(
                     "string",
@@ -60,20 +67,26 @@ android {
             BuildType.RELEASE -> {
                 this.buildConfigField(
                     apiTypeName,
-                    githubApi,
-                    properties["PROD_GITHUB_API"].toString()
+                    cdnApi,
+                    properties["CDN_API"].toString()
                 )
                 this.buildConfigField(
                     apiTypeName,
-                    stackOverFlowApi,
-                    properties["PROD_STACK_OVER_FLOW_API"].toString()
+                    api,
+                    properties["PROD_API"].toString()
+                )
+                this.buildConfigField(
+                    apiTypeName,
+                    apiKey,
+                    properties["PROD_API_KEY"].toString()
                 )
                 this.resValue(
                     "string",
                     "app_name",
                     getAppName(buildType)
                 )
-                isMinifyEnabled = false
+                isMinifyEnabled = true
+                isShrinkResources = true
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
                     "proguard-rules.pro"
@@ -99,12 +112,14 @@ dependencies {
             )
         )
     )
-    kapt(AppDependencies.compilerLibraries)
     implementation(AppDependencies.appLibraries)
-    debugImplementation(AppDependencies.debugLibraries)
-    releaseImplementation(AppDependencies.releaseLibraries)
     testImplementation(AppDependencies.testLibraries)
     androidTestImplementation(AppDependencies.androidTestLibraries)
+    kapt(AppDependencies.compilerLibraries)
+    kaptTest(AppDependencies.compilerTestLibraries)
+    kaptAndroidTet(AppDependencies.compilerAndroidTestLibraries)
+    debugImplementation(AppDependencies.debugLibraries)
+    releaseImplementation(AppDependencies.releaseLibraries)
 }
 
 enum class BuildType(val value: String) {
@@ -113,7 +128,7 @@ enum class BuildType(val value: String) {
 }
 
 fun getAppName(buildType: BuildType): String {
-    val appName = "batdemir"
+    val appName = "The Movie"
     return when (buildType) {
         BuildType.DEBUG -> "$appName - Debug"
         BuildType.RELEASE -> appName
