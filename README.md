@@ -14,3 +14,7 @@
 
 - [Guide to app architecture](https://developer.android.com/jetpack/guide)
 
+## Project Template
+
+- [Project Template](https://github.com/batdemir/Template-Kotlin-Project)
+
